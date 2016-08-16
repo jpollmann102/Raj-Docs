@@ -11,15 +11,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
 
 
 public class WordProgram{
@@ -38,6 +43,10 @@ public class WordProgram{
 		JFrame frame = new JFrame("Raj Docs - New Doc");
 		fc = new JFileChooser();
 		
+		ImageIcon alignLeft = new ImageIcon(WordProgram.class.getResource("img/align_left.png"));
+		ImageIcon alignMid = new ImageIcon(WordProgram.class.getResource("img/align_mid.png"));
+		ImageIcon alignRight = new ImageIcon(WordProgram.class.getResource("img/align_right.png"));
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		
@@ -54,7 +63,21 @@ public class WordProgram{
 		save.setEnabled(false);
 		JMenuItem saveAs = new JMenuItem("Save As");
 		JMenuItem open = new JMenuItem("Open");
-		JMenuItem print = new JMenuItem("Print (WIP)");
+		JMenuItem print = new JMenuItem("Print");
+		print.setEnabled(false);
+		
+		JToolBar toolBar = new JToolBar();
+		toolBar.setFloatable(false);
+		JLabel textFont = new JLabel("Font");
+		JComboBox font = new JComboBox();
+		font.addItem("Times New Roman");
+		font.setMaximumSize(font.getPreferredSize());
+		JLabel textFontSize = new JLabel("Font Size");
+		JTextField fontSize = new JTextField("12", 3);
+		fontSize.setMaximumSize(fontSize.getPreferredSize());
+		JButton alignLeftButton = new JButton(alignLeft);
+		JButton alignMidButton = new JButton(alignMid);
+		JButton alignRightButton = new JButton(alignRight);
 		
 		textArea = new JTextArea();
 		textArea.setColumns(140);
@@ -70,8 +93,8 @@ public class WordProgram{
 		// add components
 		
 		frame.setJMenuBar(menuBar);
+		frame.getContentPane().add(toolBar, BorderLayout.NORTH);
 		frame.add(content);
-		
 		content.add(textArea, BorderLayout.CENTER);
 		
 		menuBar.add(menu);
@@ -81,7 +104,13 @@ public class WordProgram{
 		menu.add(open);
 		menu.add(print);
 		
-		
+		toolBar.add(textFont);
+		toolBar.add(font);
+		toolBar.add(textFontSize);
+		toolBar.add(fontSize);
+		toolBar.add(alignLeftButton);
+		toolBar.add(alignMidButton);
+		toolBar.add(alignRightButton);
 		
 		//
 		
@@ -133,6 +162,14 @@ public class WordProgram{
 				}
 				
 				save.setEnabled(true);
+			}
+		});
+		
+		alignLeftButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(textArea.getSelectedText().length() > 0){
+					
+				}
 			}
 		});
 		
